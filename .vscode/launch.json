@@ -1,0 +1,23 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch MainWindow",
+            "request": "launch",
+            "mainClass": "main.MainWindow",
+            "projectName": "JavaGameEngine_e7e1449d"
+        },
+        {
+            "type": "java",
+            "name": "Launch MainWindow",
+            "request": "launch",
+            "mainClass": "MainWindow",
+            "projectName": "JavaGameEngine_e7e1449d",
+            "vmArgs": ""
+        }
+    ]
+}
