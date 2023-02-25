@@ -6,18 +6,26 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Launch MainWindow",
+            "name": "Launch MainWindow MacOS",
             "request": "launch",
             "mainClass": "main.MainWindow",
-            "projectName": "JavaGameEngine_e7e1449d"
+            "projectName": "JavaGameEngine_175fa9e3",
+            "vmArgs": "-XstartOnFirstThread"
         },
         {
             "type": "java",
             "name": "Launch MainWindow",
             "request": "launch",
-            "mainClass": "MainWindow",
-            "projectName": "JavaGameEngine_e7e1449d",
-            "vmArgs": ""
+            "mainClass": "main.MainWindow",
+            "projectName": "JavaGameEngine_Windows"
+        },
+        {
+            "type": "java",
+            "name": "Launch MainWindow_MacOS",
+            "request": "launch",
+            "mainClass": "main.MainWindow",
+            "projectName": "JavaGameEngine_MaxOS",
+            "vmArgs": "-XstartOnFirstThread"
         }
     ]
 }
