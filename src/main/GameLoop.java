@@ -28,7 +28,7 @@ public class GameLoop {
         this.heightBuffer = heightBuffer;
         this.projection = new Projection(60, this.window);
         for(int i = 0 ; i < 11 ; ++i){
-            this.triangle[i] = new Triangle(new Vec3d(i * 11 - 5, -1, 10), new Vec3d(i * 11 + 5, -1, 10), new Vec3d(i * 11 , -1, 20));
+            this.triangle[i] = new Triangle(new Vec3d(i, 0, 10), new Vec3d(i + 1, 0, 10), new Vec3d(i + 0.5 , 0, 11));
         }
         
     }

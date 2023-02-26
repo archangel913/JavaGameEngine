@@ -56,7 +56,7 @@ public class Projection {
             DoubleBuffer xAngleBuffer = BufferUtils.createDoubleBuffer(1);
             DoubleBuffer yAngleBuffer = BufferUtils.createDoubleBuffer(1);
             glfwGetCursorPos(window, xAngleBuffer, yAngleBuffer);
-            this.xAngle += xAngleBuffer.get(0) * 0.01;
+            this.xAngle -= xAngleBuffer.get(0) * 0.01;
             this.yAngle -= yAngleBuffer.get(0) * 0.01;
             glfwSetCursorPos(window, 0, 0);
         }     
