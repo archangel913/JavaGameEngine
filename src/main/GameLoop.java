@@ -2,6 +2,8 @@ package main;
 import java.nio.IntBuffer;
 
 import main.GameMath.DoubleVec.Vec3d;
+import main.Object.Camera;
+import main.Object.GameObject;
 import main.Object.Triangle;
 
 import static org.lwjgl.opengl.GL21.*;
@@ -19,18 +21,21 @@ public class GameLoop {
     private IntBuffer widthBuffer;
     private IntBuffer heightBuffer;
 
-    private Projection projection;
-    private Triangle triangle[] = new Triangle[11];
+    private Camera mainCamera;
+    private GameObject gameObject[] = new Triangle[11];
 
     public GameLoop(long window, IntBuffer widthBuffer, IntBuffer heightBuffer){
         this.window = window;
         this.widthBuffer = widthBuffer;
         this.heightBuffer = heightBuffer;
-        this.projection = new Projection(60, this.window);
+        this.mainCamera = new Camera(60, this.window);
         for(int i = 0 ; i < 11 ; ++i){
-            this.triangle[i] = new Triangle(new Vec3d(i, 0, 10), new Vec3d(i + 1, 0, 10), new Vec3d(i + 0.5 , 0, 11));
-        }
-        
+            this.gameObject[i] = new Triangle(
+                new Vec3d(i * 11 - 5, -1, 10),
+                new Vec3d(i * 11 + 5, -1, 10),
+                new Vec3d(i * 11 , -1, 20),
+                this.mainCamera);
+        }  
     }
 
     public void gameLoop(){
@@ -46,11 +51,14 @@ public class GameLoop {
             this.alpha = this.accumulater / interval;
             render();
         }
-        this.projection.keyCallbackDispose();
+        this.mainCamera.keyCallbackDispose();
     }
 
     private void input(){
-        this.projection.input(this.window);
+        this.mainCamera.input(this.window);
+        for(GameObject t : this.gameObject){
+            t.input();
+        }
 
     }
 
@@ -64,8 +72,10 @@ public class GameLoop {
         glViewport(0, 0, this.widthBuffer.get(), this.heightBuffer.get());
         glClear(GL_COLOR_BUFFER_BIT);
 
-        for(Triangle t : this.triangle){
-            this.projection.render(t);
+
+        this.mainCamera.render();
+        for(GameObject t : this.gameObject){
+            t.render();
         }
 
         glfwSwapBuffers(this.window);
@@ -77,6 +87,9 @@ public class GameLoop {
 
     private void update(){
         this.timer.update();
-        this.projection.update(this.window);
+        this.mainCamera.update(this.window);
+        for(GameObject t : this.gameObject){
+            t.update();
+        }
     }
 }
