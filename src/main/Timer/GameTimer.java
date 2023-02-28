@@ -1,4 +1,4 @@
-package main;
+package main.Timer;
 public class GameTimer {
     private double lastLoopTime;
     private double elapsedTime;

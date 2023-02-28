@@ -5,6 +5,7 @@ import main.GameMath.DoubleVec.Vec3d;
 import main.Object.Camera;
 import main.Object.GameObject;
 import main.Object.Triangle;
+import main.Timer.GameTimer;
 
 import static org.lwjgl.opengl.GL21.*;
 import static org.lwjgl.glfw.GLFW.*;
