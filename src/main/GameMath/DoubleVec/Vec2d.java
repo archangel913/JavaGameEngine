@@ -9,24 +9,32 @@ public class Vec2d {
         this.y = y;
     }
 
-    public void add(Vec2d other){
-        this.x += other.x;
-        this.y += other.y;
+    public Vec2d add(Vec2d other){
+        return new Vec2d(
+            this.x += other.x,
+            this.y += other.y
+        );
     }
 
-    public void sub(Vec2d other){
-        this.x -= other.x;
-        this.y -= other.y;
+    public Vec2d sub(Vec2d other){
+        return new Vec2d(
+            this.x -= other.x,
+            this.y -= other.y
+        );
     }
 
-    public void mul(double num){
-        this.x *= num;
-        this.y *= num;
+    public Vec2d mul(double num){
+        return new Vec2d(
+            this.x *= num,
+            this.y *= num
+        );
     }
 
-    public void div(double num){
-        this.x /= num;
-        this.y /= num;
+    public Vec2d div(double num){
+        return new Vec2d(
+            this.x /= num,
+            this.y /= num
+        );
     }
 
     public double dot(Vec2d other){
