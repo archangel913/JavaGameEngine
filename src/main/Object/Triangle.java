@@ -25,15 +25,10 @@ public class Triangle extends GameObject{
     public void render() {
         glPointSize(10);
         glColor3d(1,1,1);
-        glBegin(GL_TRIANGLES);
+        
         Vec3d[] culcVertexs = super.getVertexs();
-        culcVertexs = super.camera.rotationY(culcVertexs);
-        culcVertexs = super.camera.rotationX(culcVertexs);
-        for(Vec3d v : culcVertexs){
-            if(!super.camera.isVisible(this)) break;
-            Vec2d tmp = super.camera.transform(v);
-            glVertex2d(tmp.getX(), tmp.getY());
-        }
-        glEnd();
+        culcVertexs = super.camera.ratation(culcVertexs);
+
+        super.camera.clipping(culcVertexs);
     }
 }
