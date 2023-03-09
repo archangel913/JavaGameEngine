@@ -30,11 +30,11 @@ public class GameLoop {
         this.widthBuffer = widthBuffer;
         this.heightBuffer = heightBuffer;
         this.mainCamera = new Camera(60, this.window);
-        for(int i = 0 ; i < 11 ; ++i){
+        for(int i = 0 ; i < this.gameObject.length ; ++i){
             this.gameObject[i] = new Triangle(
-                new Vec3d(i * 11 - 5, -1, 10),
-                new Vec3d(i * 11 + 5, -1, 10),
-                new Vec3d(i * 11 , -1, 20),
+                new Vec3d((i * 3) + 1, -1, 10),
+                new Vec3d((i * 3) -1 , -1, 10),
+                new Vec3d((i * 3), -1, Math.sqrt(2) + 10),
                 this.mainCamera);
         }  
     }

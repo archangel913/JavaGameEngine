@@ -1,7 +1,5 @@
 package main.GameMath.DoubleVec;
 
-import org.omg.CORBA.PUBLIC_MEMBER;
-
 public class Vec3d {
     private double x;
     private double y;
@@ -13,28 +11,36 @@ public class Vec3d {
         this.z = z;
     }
 
-    public void add(Vec3d other){
-        this.x += other.x;
-        this.y += other.y;
-        this.z += other.z;
+    public Vec3d add(Vec3d other){
+        return new Vec3d(
+            this.x += other.x,
+            this.y += other.y,
+            this.z += other.z
+        );
     }
 
-    public void sub(Vec3d other){
-        this.x -= other.x;
-        this.y -= other.y;
-        this.z -= other.z;
+    public Vec3d sub(Vec3d other){
+        return new Vec3d(
+            this.x -= other.x,
+            this.y -= other.y,
+            this.z -= other.z
+        );
     }
 
-    public void mul(double num){
-        this.x *= num;
-        this.y *= num;
-        this.z *= num;
+    public Vec3d mul(double num){
+        return new Vec3d(
+            this.x *= num,
+            this.y *= num,
+            this.z *= num
+        );
     }
 
-    public void div(double num){
-        this.x /= num;
-        this.y /= num;
-        this.z /= num;
+    public Vec3d div(double num){
+        return new Vec3d(
+            this.x /= num,
+            this.y /= num,
+            this.z /= num
+        );
     }
 
     public double dot(Vec3d other){
