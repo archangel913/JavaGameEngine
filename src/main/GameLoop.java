@@ -5,6 +5,7 @@ import main.GameMath.DoubleVec.Vec3d;
 import main.Object.Camera;
 import main.Object.GameObject;
 import main.Object.Triangle;
+import main.Object.Debug.DebugObject;
 import main.Timer.GameTimer;
 
 import static org.lwjgl.opengl.GL21.*;
@@ -23,7 +24,8 @@ public class GameLoop {
     private IntBuffer heightBuffer;
 
     private Camera mainCamera;
-    private GameObject gameObject[] = new Triangle[11];
+    private GameObject gameObject[] = new Triangle[0];
+    private DebugObject debuObject;
 
     public GameLoop(long window, IntBuffer widthBuffer, IntBuffer heightBuffer){
         this.window = window;
@@ -37,6 +39,7 @@ public class GameLoop {
                 new Vec3d((i * 3), -1, Math.sqrt(2) + 10),
                 this.mainCamera);
         }  
+        this.debuObject = new DebugObject(this.mainCamera);
     }
 
     public void gameLoop(){
@@ -60,7 +63,7 @@ public class GameLoop {
         for(GameObject t : this.gameObject){
             t.input();
         }
-
+        this.debuObject.input();
     }
 
     private void render(){
@@ -78,6 +81,7 @@ public class GameLoop {
         for(GameObject t : this.gameObject){
             t.render();
         }
+        this.debuObject.render();
 
         glfwSwapBuffers(this.window);
         glfwPollEvents();
@@ -92,5 +96,6 @@ public class GameLoop {
         for(GameObject t : this.gameObject){
             t.update();
         }
+        this.debuObject.update();
     }
 }

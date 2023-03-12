@@ -20,6 +20,9 @@ public class Camera {
     private Vec3d position;
     //private Vec2d angle;
 
+    private double xRad;
+    private double yRad;
+
     private double sinX;
     private double cosX;
     private double sinY;
@@ -49,22 +52,22 @@ public class Camera {
 
     public void input(long window){
         if(glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS){
-            this.position.add(cameraRotation(new Vec3d(0, 0, 0.1)));
+            this.position = this.position.add(cameraRotation(new Vec3d(0, 0, 0.1)));
         }
         if(glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS){
-            this.position.add(cameraRotation(new Vec3d(-0.1, 0, 0)));
+            this.position = this.position.add(cameraRotation(new Vec3d(-0.1, 0, 0)));
         }
         if(glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS){
-            this.position.add(cameraRotation(new Vec3d(0, 0, -0.1)));
+            this.position = this.position.add(cameraRotation(new Vec3d(0, 0, -0.1)));
         }
         if(glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS){
-            this.position.add(cameraRotation(new Vec3d(0.1, 0, 0)));
+            this.position = this.position.add(cameraRotation(new Vec3d(0.1, 0, 0)));
         }
         if(glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS){
-            this.position.add(cameraRotation(new Vec3d(0, 0.1, 0)));
+            this.position = this.position.add(cameraRotation(new Vec3d(0, 0.1, 0)));
         }
         if(glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS){
-            this.position.add(cameraRotation(new Vec3d(0, -0.1, 0)));
+            this.position = this.position.add(cameraRotation(new Vec3d(0, -0.1, 0)));
         }
     }
 
@@ -76,8 +79,8 @@ public class Camera {
             this.yAngle -= xAngleBuffer.get(0) * 0.01;
             this.xAngle -= yAngleBuffer.get(0) * 0.01;
             glfwSetCursorPos(window, 0, 0);
-            double xRad = this.xAngle * Math.PI / 180;
-            double yRad = this.yAngle * Math.PI / 180;
+            this.xRad = this.xAngle * Math.PI / 180;
+            this.yRad = this.yAngle * Math.PI / 180;
             this.sinY = Math.sin(yRad);
             this.cosY = Math.cos(yRad);
             this.sinX = Math.sin(xRad);
@@ -98,11 +101,12 @@ public class Camera {
             double x = oldVertexs[i].getX() - this.position.getX();
             double y = oldVertexs[i].getY() - this.position.getY();
             double z = oldVertexs[i].getZ() - this.position.getZ();
-            double newX = x * this.cosY + z * this.sinY;
-            double newZ = -x * this.sinY + z * this.cosY;
-            double newY = y * this.cosX - newZ * this.sinX;
-            newZ = newY * this.sinX + newZ * this.cosX;
-            newVertexs[i] = new Vec3d(newX + this.position.getX(), newY + this.position.getY(), newZ + this.position.getZ());
+            Vec3d rotationX = new Vec3d(x * this.cosY + z * this.sinY, y, -x * this.sinY + z * this.cosY);
+            x = rotationX.getX();
+            y = rotationX.getY();
+            z = rotationX.getZ();
+            Vec3d culclated = new Vec3d(x, y * this.cosX - z * this.sinX, y * this.sinX + z * this.cosX);
+            newVertexs[i] = culclated.add(this.position);
         }
         return newVertexs;
 
@@ -175,6 +179,7 @@ public class Camera {
     }
 
     public Vec3d cameraRotation(Vec3d front){
+        //上下回転の時に対応させる
         double x = front.getX();
         double y = front.getY();
         double z = front.getZ();
