@@ -13,33 +13,33 @@ public class Vec3d {
 
     public Vec3d add(Vec3d other){
         return new Vec3d(
-            this.x += other.x,
-            this.y += other.y,
-            this.z += other.z
+            this.x + other.x,
+            this.y + other.y,
+            this.z + other.z
         );
     }
 
     public Vec3d sub(Vec3d other){
         return new Vec3d(
-            this.x -= other.x,
-            this.y -= other.y,
-            this.z -= other.z
+            this.x - other.x,
+            this.y - other.y,
+            this.z - other.z
         );
     }
 
     public Vec3d mul(double num){
         return new Vec3d(
-            this.x *= num,
-            this.y *= num,
-            this.z *= num
+            this.x * num,
+            this.y * num,
+            this.z * num
         );
     }
 
     public Vec3d div(double num){
         return new Vec3d(
-            this.x /= num,
-            this.y /= num,
-            this.z /= num
+            this.x / num,
+            this.y / num,
+            this.z / num
         );
     }
 
